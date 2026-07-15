@@ -20,6 +20,13 @@ export default defineConfig({
     globals: true,
     setupFiles: './test/setup.ts',
     environment: 'happy-dom',
+    include: ['test/unit/**/*.test.{ts,tsx}'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**'],
+      exclude: ['src/core/**', 'src/**/*.d.ts'],
+      reporter: ['text', 'html'],
+    },
   },
 } as UserConfig & {
   test: InlineConfig;

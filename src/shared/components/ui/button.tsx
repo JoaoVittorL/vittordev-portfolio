@@ -43,10 +43,17 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, icon, children, label, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button';
+    // Slot exige exatamente um filho — com asChild, icon/label não se aplicam
+    if (asChild) {
+      return (
+        <Slot className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+          {children}
+        </Slot>
+      );
+    }
 
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
         {icon && (
           <span className="flex-shrink-0">
             {React.isValidElement(icon) &&
@@ -56,7 +63,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </span>
         )}
         {label || children}
-      </Comp>
+      </button>
     );
   },
 );
