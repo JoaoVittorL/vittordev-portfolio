@@ -1,66 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import NavLinks from '@/shared/components/nav-link';
 
-interface HeaderProps {
-  darkMode: boolean;
-  toggleDarkMode: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
+const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    let raf = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50);
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        setProgress(max > 0 ? window.scrollY / max : 0);
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
+  // Trava o scroll da página enquanto o menu mobile está aberto
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md py-3 shadow-lg' 
+        scrolled
+          ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-3'
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-center items-center">
+      {/* Progresso de leitura da página */}
+      <span
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 h-px w-full origin-left bg-accent-400/80"
+        style={{ transform: `scaleX(${progress})` }}
+      />
+      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+
+        <a href="#hero" className="font-display font-bold text-lg tracking-tight text-slate-200">
+          João Vittor<span className="text-accent-400">.</span>
+        </a>
 
         <nav className="hidden md:flex items-center space-x-8">
           <NavLinks />
-          <button 
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
         </nav>
 
         <div className="md:hidden flex items-center">
-          <button 
-            onClick={toggleDarkMode}
-            className="p-2 mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button 
+          <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="p-2 rounded-md text-slate-300 hover:text-slate-100 hover:bg-slate-800 transition-colors"
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      <div 
-        className={`fixed inset-0 bg-white dark:bg-gray-900 z-40 transform transition-transform duration-300 ease-in-out ${
+      <div
+        className={`fixed inset-0 bg-slate-950/95 backdrop-blur z-40 transform transition-transform duration-300 ease-in-out ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         } md:hidden flex flex-col justify-center items-center`}
       >

@@ -11,8 +11,8 @@ const AboutItem: React.FC<AboutItemProps> = ({ icon, title, description }) => {
         {icon}
       </div>
       <div>
-        <h4 className="text-lg font-medium mb-1">{title}</h4>
-        <p className="text-gray-700 dark:text-gray-300">{description}</p>
+        <h4 className="text-lg font-medium mb-1 text-slate-200">{title}</h4>
+        <p className="text-slate-400">{description}</p>
       </div>
     </li>
   );

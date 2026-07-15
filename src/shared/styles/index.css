@@ -4,11 +4,8 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--foreground);
+  font-size: 15px;
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -16,7 +13,13 @@ html {
 
 @layer base {
   body {
-    @apply text-gray-900 dark:text-white-500;
+    @apply bg-slate-950 font-sans leading-relaxed text-slate-400;
+  }
+
+  /* Títulos com a fonte display (Space Grotesk) — quebra o "Inter em tudo" */
+  h1, h2, h3, h4 {
+    @apply font-display text-slate-200;
+    letter-spacing: -0.02em;
   }
 
   /* Custom scrollbar */
@@ -25,55 +28,73 @@ html {
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100 dark:bg-gray-800;
+    @apply bg-slate-950;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+    @apply rounded-full bg-slate-800;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-gray-600;
+    @apply bg-slate-700;
+  }
+
+  ::selection {
+    @apply bg-accent-400/30 text-slate-100;
+  }
+}
+
+@layer components {
+  /* Rótulo pequeno em caixa alta + mono — cabeçalhos numerados de seção */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400;
+  }
+
+  /* Linha divisória curta e intencional (acento) */
+  .accent-rule {
+    @apply h-px w-10 bg-accent-400/60;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text;
+  /* Revelação no scroll — usada com o hook useReveal */
+  .reveal {
+    @apply translate-y-4 opacity-0 transition-all duration-700 ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-revealed {
+    @apply translate-y-0 opacity-100;
   }
 }
 
-/* Custom cursor */
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  pointer-events: none;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  z-index: 9999;
-  backdrop-filter: invert(1);
-}
-
-/* Selection styling */
-::selection {
-  @apply bg-blue-500 text-white-500;
-}
-
-/* Animations */
+/* Flutuação sutil (indicador de scroll do hero) */
 @keyframes float {
-  0% {
-    transform: translateY(0px);
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
+    transform: translateY(-8px);
   }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-float,
+  .animate-ping {
+    animation: none !important;
+  }
 }

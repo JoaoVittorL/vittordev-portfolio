@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import TagButton from '@/shared/components/tag-button';
 import ProjectCard from '@/shared/components/project-card';
+import { useReveal } from '@/shared/hooks/use-reveal';
 
 export interface Project {
   id: number;
@@ -13,7 +14,7 @@ export interface Project {
 }
 
 const Projects: React.FC = () => {
-  const projectsRef = useRef<HTMLDivElement>(null);
+  const { ref, isRevealed } = useReveal<HTMLDivElement>();
   const [filter, setFilter] = useState<string>('all');
 
   const projects: Project[] = [
@@ -30,62 +31,40 @@ const Projects: React.FC = () => {
 
   const allTags = Array.from(new Set(projects.flatMap(project => project.tags)));
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
+  const filteredProjects = filter === 'all'
+    ? projects
     : projects.filter(project => project.tags.includes(filter));
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (projectsRef.current) {
-      observer.observe(projectsRef.current);
-    }
-
-    return () => {
-      if (projectsRef.current) {
-        observer.unobserve(projectsRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div 
-        ref={projectsRef}
-        className="container mx-auto px-4 md:px-6 transition-all duration-1000 opacity-0 translate-y-10"
+    <section id="projects" className="py-20 md:py-28">
+      <div
+        ref={ref}
+        className={`reveal ${isRevealed ? 'is-revealed' : ''} container mx-auto px-4 md:px-6`}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="mb-16">
+            <span className="eyebrow mb-4">04 <span className="accent-rule" /> Projetos</span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Meus Projetos
             </h2>
-            <div className="h-1 w-20 bg-blue-600 mx-auto mb-8 rounded-full"></div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-              Aqui estão alguns dos meus projetos.
-              Cada projeto representa uma desafio único e mostra  
-              diferentes aspectos de minhas habilidades e experiência.  
+            <p className="text-lg text-slate-400 max-w-2xl">
+              Aqui estão alguns dos meus projetos.
+              Cada projeto representa uma desafio único e mostra
+              diferentes aspectos de minhas habilidades e experiência.
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            <TagButton 
-              active={filter === 'all'} 
+          <div className="flex flex-wrap gap-2 mb-12">
+            <TagButton
+              active={filter === 'all'}
               onClick={() => setFilter('all')}
             >
               Todos
             </TagButton>
             {allTags.map(tag => (
-              <TagButton 
-                key={tag} 
-                active={filter === tag} 
+              <TagButton
+                key={tag}
+                active={filter === tag}
                 onClick={() => setFilter(tag)}
               >
                 {tag}

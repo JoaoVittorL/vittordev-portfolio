@@ -43,16 +43,16 @@ export function Modal({ isOpen, onClose, title, children, footerContent, showClo
 
       <div
         ref={modalRef}
-        className="bg-white-500 relative m-auto flex max-h-[90vh] w-[95%] transform flex-col rounded-xl shadow-xl transition-all duration-300 ease-out sm:max-h-[85vh] sm:w-auto sm:max-w-lg"
+        className="bg-slate-900 border border-slate-800 relative m-auto flex max-h-[90vh] w-[95%] transform flex-col rounded-xl shadow-xl transition-all duration-300 ease-out sm:max-h-[85vh] sm:w-auto sm:max-w-lg"
       >
-        <div className="flex flex-none items-center justify-between border-b p-2">
-          <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
+        <div className="flex flex-none items-center justify-between border-b border-slate-800 p-2">
+          <h2 id="modal-title" className="text-lg font-semibold text-slate-200">
             {title}
           </h2>
           {showCloseButton && (
             <button
               onClick={onClose}
-              className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-400/60"
               aria-label="Close modal"
             >
               <X className="h-5 w-5" />
@@ -63,11 +63,11 @@ export function Modal({ isOpen, onClose, title, children, footerContent, showClo
         <div className="min-h-0 flex-1 overflow-y-auto p-4">{children}</div>
 
         {(footerContent || showCloseButton) && (
-          <div className="flex-none rounded-b-xl border-t bg-white-500 p-4">
+          <div className="flex-none rounded-b-xl border-t border-slate-800 bg-slate-900 p-4">
             {footerContent || (
               <button
                 onClick={onClose}
-                className="text-white-500 w-full rounded-lg bg-indigo-600 px-4 py-2 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="text-slate-950 w-full rounded-lg bg-accent-400 px-4 py-2 font-medium hover:bg-accent-300 focus:outline-none focus:ring-2 focus:ring-accent-400/60"
               >
                 Close Modal
               </button>

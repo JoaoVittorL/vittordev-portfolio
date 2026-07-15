@@ -8,10 +8,7 @@ import { useFormContactModel } from "./form-contact-model"
 export function FormContact() {
   const {handleSubmitForm,handleSubmit,register,errors,isLoading} = useFormContactModel()
   return  <form onSubmit={(e) => {
-    handleSubmit((values) => {
-      console.log(values);
-      handleSubmitForm(e);
-    })(e);
+    handleSubmit(() => handleSubmitForm(e))(e);
   }}  className="space-y-2">
     <div>
         <Label htmlFor="name">Nome</Label>
@@ -23,7 +20,7 @@ export function FormContact() {
     </div>
     <div>
         <Label htmlFor="message">Mensagem</Label>
-        <Textarea autoComplete="off" id="message" {...register('message')} rows={10} placeholder="Digite sua mensagem" disabled={isLoading} className={errors.message?.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''} />
+        <Textarea  autoComplete="off" id="message" {...register('message')} rows={10} placeholder="Digite sua mensagem" disabled={isLoading} className={errors.message?.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500 resize-none' : 'resize-none'} />
     </div>
     <Button type="submit" size={'full'} disabled={isLoading}>{isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />} {isLoading ? 'Enviando...' : 'Enviar'}</Button>
 </form>
