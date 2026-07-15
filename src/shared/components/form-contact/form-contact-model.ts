@@ -21,29 +21,29 @@ export const useFormContactModel = () => {
     }
   })
 
-  const handleSubmitForm = async  (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     const form = e.target as HTMLFormElement;
     setIsLoading(true);
     try {
-      const response =  await emailjs.sendForm(
-          env.VITE_SERVICE_EMAIL,
-          env.VITE_TEMPLATE_ID_EMAIL,
-          form,
-          env.VITE_PUBLIC_KEY_EMAIL
-        )
-      
-        setIsLoading(false);
-      if(response.status === 200) {
-        reset()
-        return toast.success('Email enviado com sucesso. Em breve entraremos em contato.');
-      }else{
-        return toast.error('Ocorreu um erro ao enviar a mensagem.');
+      const response = await emailjs.sendForm(
+        env.VITE_SERVICE_EMAIL,
+        env.VITE_TEMPLATE_ID_EMAIL,
+        form,
+        env.VITE_PUBLIC_KEY_EMAIL
+      );
+
+      if (response.status === 200) {
+        reset();
+        toast.success('Email enviado com sucesso. Em breve entraremos em contato.');
+      } else {
+        toast.error('Ocorreu um erro ao enviar a mensagem.');
       }
-      console.log(response)
-    }catch (error) {
-      return toast.error('Ocorreu um erro ao enviar a mensagem.'); 
+    } catch (error) {
+      toast.error('Ocorreu um erro ao enviar a mensagem.');
+    } finally {
+      setIsLoading(false);
     }
   };
 

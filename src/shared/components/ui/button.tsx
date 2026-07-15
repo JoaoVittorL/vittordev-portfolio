@@ -6,17 +6,17 @@ import * as React from 'react';
 import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
-  'h-10 flex gap-2 items-center justify-center whitespace-nowrap rounded-md text-sm  transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'h-10 flex gap-2 items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-400/60 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-blue-500 text-white-500 shadow hover:bg-blue-500/80',
-        destructive: 'bg-red-500 text-white-500 shadow-sm hover:bg-red-500/80',
-        secondary: 'bg-blue-600 text-white-500 shadow-sm hover:bg-blue-600/80',
-        outline: 'border border-input shadow-sm dark:text-white-500 hover:bg-accent hover:text-accent-foreground ',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-        primary: 'bg-green-500 text-white-500 shadow-sm hover:bg-green-500/80',
+        default: 'bg-accent-400 font-medium text-slate-950 shadow-sm hover:bg-accent-300',
+        destructive: 'bg-red-500/90 text-slate-50 shadow-sm hover:bg-red-500',
+        secondary: 'bg-slate-800 text-slate-200 shadow-sm hover:bg-slate-700',
+        outline: 'border border-accent-400/50 text-accent-300 hover:bg-accent-400/10',
+        ghost: 'text-slate-300 hover:bg-slate-800 hover:text-slate-100',
+        link: 'text-accent-300 underline-offset-4 hover:underline',
+        primary: 'bg-accent-400 font-medium text-slate-950 shadow-sm hover:bg-accent-300',
       },
       size: {
         default: 'px-3 py-2',

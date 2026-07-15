@@ -11,8 +11,8 @@ const ContactItem: React.FC<ContactItemProps> = ({ icon, title, detail }) => {
         {icon}
       </div>
       <div>
-        <h4 className="font-medium">{title}</h4>
-        <p className="text-gray-700 dark:text-gray-300">{detail}</p>
+        <h4 className="font-medium text-slate-200">{title}</h4>
+        <p className="text-slate-400">{detail}</p>
       </div>
     </div>
   );

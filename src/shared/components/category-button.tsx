@@ -8,10 +8,10 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ children, active, onCli
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-full transition-all duration-300 ${
+      className={`rounded-full border px-4 py-1.5 font-mono text-sm transition-colors duration-300 ${
         active
-          ? 'bg-blue-600 text-white-500 shadow-md'
-          : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+          ? 'border-accent-400/60 bg-accent-400/10 text-accent-300'
+          : 'border-slate-800 text-slate-400 hover:border-slate-600 hover:text-slate-200'
       }`}
     >
       {children}

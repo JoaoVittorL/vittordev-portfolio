@@ -1,75 +1,84 @@
 import SocialButton from "@/shared/components/social-button";
+import { useReveal } from "@/shared/hooks/use-reveal";
 import { ArrowDown, Github, Linkedin } from "lucide-react";
-import { useEffect, useRef } from "react";
+import React from "react";
 
 const Hero: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
-
-    return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
-      }
-    };
-  }, []);
+  const { ref, isRevealed } = useReveal<HTMLDivElement>();
+  const revealed = isRevealed ? 'is-revealed' : '';
 
   return (
-    <section 
-      id="hero" 
-      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 right-1/4 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-500/10 dark:bg-purple-500/20 rounded-full filter blur-3xl"></div>
-      </div>
+      {/* Grid técnico sutil com máscara radial — textura, não decoração */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(30_41_59/0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgb(30_41_59/0.5)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_65%_55%_at_50%_40%,black,transparent)]"
+      />
 
-      <div 
-        ref={heroRef}
-        className="container mx-auto px-4 md:px-6 z-10 transition-all duration-1000 opacity-0 translate-y-10"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-              João Vittor
+      <div ref={ref} className="container mx-auto px-4 md:px-6 relative">
+        <div className="max-w-4xl">
+          {/* Status de disponibilidade — detalhe humano, não template */}
+          <span className={`reveal ${revealed} eyebrow mb-8`}>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400"></span>
             </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
-            Analista de dados | Desenvolvedor Frontend 
-          </p>
-          
-          <div className="flex justify-center gap-4 mb-12">
-            <SocialButton href="https://github.com/JoaoVittorL" icon={<Github size={20} />} label="GitHub" />
-            <SocialButton 
-              href="https://www.linkedin.com/in/jo%C3%A3o-vittor-lopes-dos-santos-199103201" 
-              icon={<Linkedin size={20} />} 
-              label="LinkedIn" 
-            />
-          </div>
-          
-          <a
-            href="#about"
-            className="mx-auto inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white-500 dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300 animate-bounce"
-            aria-label="Scroll down"
+            Disponível para novas oportunidades
+          </span>
+
+          <h1
+            className={`reveal ${revealed} text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] mb-6`}
+            style={{ '--reveal-delay': '90ms' } as React.CSSProperties}
           >
-            <ArrowDown size={24} />
-          </a>
+            João Vittor<span className="text-accent-400">.</span>
+          </h1>
+
+          <p
+            className={`reveal ${revealed} text-lg md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10`}
+            style={{ '--reveal-delay': '180ms' } as React.CSSProperties}
+          >
+            Analista de dados e desenvolvedor frontend. Transformo números e
+            interfaces em produtos que as pessoas realmente entendem — com{" "}
+            <span className="text-slate-200 font-medium">
+              React, TypeScript e um olhar para detalhe
+            </span>
+            .
+          </p>
+
+          <div
+            className={`reveal ${revealed} flex flex-wrap items-center gap-4`}
+            style={{ '--reveal-delay': '270ms' } as React.CSSProperties}
+          >
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded border border-accent-400/50 px-6 py-3 font-mono text-sm text-accent-300 transition-all duration-300 hover:bg-accent-400/10 hover:shadow-[0_0_24px_-8px_rgb(45_212_191/0.5)]"
+            >
+              Vamos conversar
+            </a>
+            <div className="flex gap-3">
+              <SocialButton href="https://github.com/JoaoVittorL" icon={<Github size={20} />} label="GitHub" />
+              <SocialButton
+                href="https://www.linkedin.com/in/jo%C3%A3o-vittor-lopes-dos-santos-199103201"
+                icon={<Linkedin size={20} />}
+                label="LinkedIn"
+              />
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Indicador de scroll discreto (sem bounce infinito) */}
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 hover:text-accent-300 transition-colors"
+        aria-label="Ir para a seção sobre"
+      >
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Role</span>
+        <ArrowDown size={16} className="animate-float" />
+      </a>
     </section>
   );
 };

@@ -10,7 +10,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({ href, icon, label }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+      className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-slate-400 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/50 hover:text-accent-300"
       aria-label={label}
     >
       {icon}
