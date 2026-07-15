@@ -49,7 +49,8 @@ const Header: React.FC = () => {
         className="absolute bottom-0 left-0 h-px w-full origin-left bg-accent-400/80"
         style={{ transform: `scaleX(${progress})` }}
       />
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+      {/* z-50 relativo: sem ele o overlay do menu mobile (z-40) cobre os botões */}
+      <div className="container relative z-50 mx-auto px-4 md:px-6 flex justify-between items-center">
 
         <a href="#hero" className="font-display font-bold text-lg tracking-tight text-slate-200">
           João Vittor<span className="text-accent-400">.</span>
