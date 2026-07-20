@@ -1,7 +1,7 @@
-import React from 'react';
-import { Code, Layers, Globe, PenTool } from 'lucide-react';
 import AboutItem from '@/shared/components/about-item';
 import { useReveal } from '@/shared/hooks/use-reveal';
+import { Code, Globe, Layers, PenTool } from 'lucide-react';
+import React from 'react';
 
 const About: React.FC = () => {
   const { ref, isRevealed } = useReveal<HTMLDivElement>();
@@ -38,15 +38,20 @@ const About: React.FC = () => {
               <div className="p-6 sm:p-8">
                 <h3 className="text-2xl font-bold mb-4">Minha Jornada</h3>
                 <p className="text-slate-400 mb-6">
-                  Minha viagem na área de desenvolvimento web começou com uma curiosidade sobre
-                  como os sites funcionam. Através de aprendizado dedicado e projetos práticos,
-                  desenvolvi uma sólida base em tecnologias de frontend. Estou sempre explorando
-                  novas técnicas e mantendo-me atualizado com as tendências do desenvolvimento web.
+                  Comecei querendo entender como as coisas funcionavam por trás da tela e acabei
+                  construindo do zero o sistema que hoje mantém uma empresa inteira de pé. É uma
+                  plataforma de gestão completa (almoxarifado, orçamento, frota, projetos e
+                  materiais) feita em React e TypeScript. Está no ar há mais de 2 anos, usada todos
+                  os dias por todos os setores. O maior elogio que ela recebe é o silêncio: ninguém
+                  cogita voltar atrás.
                 </p>
                 <p className="text-slate-400">
-                  Eu acredito em criar sites que não apenas sejam visualmente atraentes, mas também
-                  sejam acessíveis, performantes e fáceis de usar. Meu objetivo é criar experiências
-                  digitais que deixem uma impressão duradoura.
+                  Depois disso, coloquei em produção um app mobile em React Native que tirou do papel
+                  as solicitações de compra e abastecimento — o que era formulário e telefonema virou
+                  alguns toques na tela. Gosto de trabalhar perto do dado: além da interface, sou
+                  fluente em Google Sheets, Excel e Looker Studio, então entrego a tela e também a
+                  história que os números dela contam. Sigo curioso, aprendendo algo novo a cada
+                  projeto. Acredito que a curiosidade é o que me mantém aqui.
                 </p>
               </div>
             </div>
@@ -60,23 +65,23 @@ const About: React.FC = () => {
                 <ul className="space-y-4">
                   <AboutItem
                     icon={<Code size={24} className="text-accent-400" />}
-                    title="Código limpo"
-                    description="Eu escrevo código limpo e bem documentado, facilitando a manutenção e colaboração nos projetos."
+                    title="Código que envelhece bem"
+                    description="Escrevo pensando em quem vai mexer nele depois — inclusive eu, seis meses adiante. Prefiro código simples e legível a código esperto."
                   />
                   <AboutItem
                     icon={<Layers size={24} className="text-accent-400" />}
-                    title="Responsividade"
-                    description="Eu desenvolvo sites responsivos, garantindo que eles sejam acessíveis em diferentes dispositivos e tamanhos de tela para uma experiência consistente."
+                    title="Do celular ao monitor"
+                    description="Faço interfaces que se comportam bem em qualquer tela. Se funciona no celular no meio da rua e no monitor grande, está no ponto."
                   />
                   <AboutItem
                     icon={<Globe size={24} className="text-accent-400" />}
-                    title="Frontend Frameworks"
-                    description="Eu uso frameworks front-end modernos, como React ou Next, para criar interfaces de usuário interativas e dinâmicas."
+                    title="React & Next no dia a dia"
+                    description="É onde eu me sinto em casa. Uso React e Next há anos para construir aplicações reais, que aguentam uso diário e crescem sem virar bagunça."
                   />
                   <AboutItem
                     icon={<PenTool size={24} className="text-accent-400" />}
-                    title="UI/UX"
-                    description="Eu desenvolvo interfaces de usuário intuitivas e agradáveis, proporcionando uma experiência de usuário excepcional."
+                    title="Cuidado com quem usa"
+                    description="Uma boa interface é aquela que ninguém precisa explicar. Cuido dos detalhes que fazem a pessoa terminar a tarefa sem nem perceber o caminho."
                   />
                 </ul>
               </div>

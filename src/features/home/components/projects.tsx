@@ -49,7 +49,7 @@ const Projects: React.FC = () => {
             </h2>
             <p className="text-lg text-slate-400 max-w-2xl">
               Aqui estão alguns dos meus projetos.
-              Cada projeto representa uma desafio único e mostra
+              Cada projeto representa um desafio único e mostra
               diferentes aspectos de minhas habilidades e experiência.
             </p>
           </div>

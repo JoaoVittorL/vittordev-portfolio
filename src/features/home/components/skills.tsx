@@ -9,15 +9,19 @@ interface Skill {
 
 const Skills: React.FC = () => {
   const skills: Skill[] = [
+    { name: 'Next', category: 'frontend' },
+    { name: 'React', category: 'frontend' },
+    { name: 'React Native', category: 'frontend' },
+    { name: 'Shopify', category: 'frontend' },
     { name: 'Tailwind CSS', category: 'frontend' },
     { name: 'Responsive Design', category: 'frontend' },
     { name: 'HTML5', category: 'frontend' },
     { name: 'CSS3/SASS', category: 'frontend' },
+    { name: 'Styled Components', category: 'frontend' },
     { name: 'JavaScript', category: 'frontend' },
     { name: 'TypeScript', category: 'frontend' },
     { name: 'Restful API', category: 'frontend' },
-    { name: 'Next', category: 'frontend' },
-    { name: 'React', category: 'frontend' },
+
     { name: 'Redux/Context API', category: 'frontend' },
     { name: 'Zod', category: 'frontend' },
     { name: 'react-hook-form', category: 'frontend' },
@@ -33,6 +37,9 @@ const Skills: React.FC = () => {
 
     { name: 'UI/UX Design', category: 'other' },
     { name: 'Agile/Scrum', category: 'other' },
+    { name: 'Excel', category: 'other' },
+    { name: 'Looker Studio', category: 'other' },
+    { name: 'Google Analytics', category: 'other' },
 
     { name: 'SQL', category: 'backend' },
     { name: 'Node', category: 'backend' },
