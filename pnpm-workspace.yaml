@@ -1,4 +1,10 @@
-# Aprova os scripts de build destas dependências (exigência do pnpm v10+)
-onlyBuiltDependencies:
-  - esbuild
-  - msw
+# Aprova os scripts de build destas dependências (o pnpm não roda scripts de
+# dependência sem aprovação explícita). O esbuild precisa do seu script para
+# linkar o binário da plataforma — sem ele o `vite build` não roda.
+#
+# A chave é `allowBuilds` desde o pnpm 11. O pnpm 10 usava
+# `onlyBuiltDependencies`, que o 11 ignora em silêncio e então derruba o install
+# com ERR_PNPM_IGNORED_BUILDS.
+allowBuilds:
+  esbuild: true
+  msw: true
