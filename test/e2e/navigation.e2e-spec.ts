@@ -1,4 +1,24 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
+
+/**
+ * Espera a rolagem suave terminar e devolve a posição final.
+ *
+ * `boundingBox()` é leitura única, sem auto-retry: medir geometria no meio de um
+ * `scrollIntoView({ behavior: 'smooth' })` lê a posição de origem. Passava no
+ * Windows por sorte de timing e falhava no Linux da CI.
+ */
+async function waitForScrollToSettle(page: Page) {
+  let previous = Number.NaN;
+
+  for (let attempt = 0; attempt < 50; attempt++) {
+    const current = await page.evaluate(() => window.scrollY);
+    if (current === previous) return current;
+    previous = current;
+    await page.waitForTimeout(100);
+  }
+
+  throw new Error(`A rolagem não estabilizou (última posição: ${previous})`);
+}
 
 test.describe('Navegação desktop', () => {
   test.beforeEach(async ({ page }) => {
@@ -102,18 +122,24 @@ test.describe('Navegação mobile', () => {
 
   test('navega para a seção ao clicar num link com a página já rolada', async ({ page }) => {
     await page.locator('#skills').scrollIntoViewIfNeeded();
+    await waitForScrollToSettle(page);
+
     await page.getByRole('button', { name: 'Abrir menu' }).click();
 
     const dialog = page.getByRole('dialog', { name: 'Menu de navegação' });
     await dialog.getByRole('link', { name: 'Sobre' }).click();
 
     await expect(page.getByRole('button', { name: 'Abrir menu' })).toBeVisible();
-    await expect(page.locator('#about')).toBeInViewport();
+    await waitForScrollToSettle(page);
 
-    // O título não pode ficar escondido atrás do header fixo
+    // O título tem de terminar visível e abaixo do header fixo — não escondido
+    // atrás dele (é o que o scroll-padding-top garante).
     const heading = (await page.getByRole('heading', { name: 'Sobre mim' }).boundingBox())!;
     const headerBox = (await page.locator('header').boundingBox())!;
+    const viewport = page.viewportSize()!;
+
     expect(heading.y).toBeGreaterThanOrEqual(headerBox.y + headerBox.height);
+    expect(heading.y).toBeLessThan(viewport.height);
   });
 
   test('fecha com Escape', async ({ page }) => {
@@ -126,12 +152,12 @@ test.describe('Navegação mobile', () => {
 
   test('devolve o scroll na posição em que estava ao fechar', async ({ page }) => {
     await page.locator('#skills').scrollIntoViewIfNeeded();
-    const before = await page.evaluate(() => window.scrollY);
+    const before = await waitForScrollToSettle(page);
 
     await page.getByRole('button', { name: 'Abrir menu' }).click();
     await page.getByRole('button', { name: 'Fechar menu' }).click();
 
-    const after = await page.evaluate(() => window.scrollY);
+    const after = await waitForScrollToSettle(page);
     expect(Math.abs(after - before)).toBeLessThan(2);
   });
 
