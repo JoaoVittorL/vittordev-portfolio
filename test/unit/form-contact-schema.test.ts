@@ -47,7 +47,7 @@ describe('formContactSchema', () => {
 
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error.issues[0].message).toMatch(/A messagem .* obrigat/);
+      expect(result.error.issues[0].message).toMatch(/A mensagem .* obrigat/);
     }
   });
 

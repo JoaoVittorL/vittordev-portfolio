@@ -9,37 +9,38 @@ const Contact: React.FC = () => {
   const { ref, isRevealed } = useReveal<HTMLDivElement>();
 
   return (
-    <section id="contact" className="py-20 md:py-28">
+    <section id="contact" className="py-16 sm:py-20 md:py-28">
       <div
         ref={ref}
         className={`reveal ${isRevealed ? 'is-revealed' : ''} container mx-auto px-4 md:px-6`}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="relative mb-16">
-            {/* Número-fantasma editorial atrás do título */}
+          <div className="relative mb-10 sm:mb-16">
+            {/* Número-fantasma editorial atrás do título — precisa de espaço para
+                funcionar; no mobile virava ruído sobre o próprio rótulo. */}
             <span
               aria-hidden="true"
-              className="pointer-events-none select-none absolute -top-8 -left-1 font-display text-8xl md:text-9xl font-bold leading-none text-slate-800/40"
+              className="pointer-events-none absolute -left-1 -top-8 hidden select-none font-display text-8xl font-bold leading-none text-slate-800/40 sm:block md:text-9xl"
             >
               03
             </span>
             <div className="relative">
               <span className="eyebrow mb-4">03 <span className="accent-rule" /> Contato</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Entre em Contato
               </h2>
-              <p className="text-lg text-slate-400 max-w-2xl">
+              <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Tenho uma boa maneira de falar com você, seja por e-mail ou telefone.
                 Estou sempre aberto a novas oportunidades de trabalho e colaboração.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 gap-6 sm:gap-10 lg:grid-cols-2">
             <div className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-lg border border-slate-800 bg-slate-900/40 p-6 sm:p-8 transition-colors hover:border-slate-700`}>
-              <h3 className="text-2xl font-bold mb-6">Informação de Contato</h3>
+              <h3 className="mb-5 text-xl font-bold sm:mb-6 sm:text-2xl">Informação de Contato</h3>
 
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 <ContactItem
                   icon={<Mail className="text-accent-400" />}
                   title="Email"
@@ -71,7 +72,7 @@ const Contact: React.FC = () => {
               className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-lg border border-slate-800 bg-slate-900/40 p-6 sm:p-8 transition-colors hover:border-slate-700`}
               style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
             >
-              <h3 className="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+              <h3 className="mb-5 text-xl font-bold sm:mb-6 sm:text-2xl">Envie uma Mensagem</h3>
 
               <FormContact />
             </div>

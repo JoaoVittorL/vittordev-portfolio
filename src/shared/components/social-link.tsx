@@ -9,7 +9,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, label }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-md flex items-center justify-center border border-slate-800 text-slate-400 hover:border-accent-400/50 hover:text-accent-300 transition-all duration-300"
+      className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-slate-400 transition-all duration-300 hover:border-accent-400/50 hover:text-accent-300"
       aria-label={label}
     >
       {label === 'GitHub' && (

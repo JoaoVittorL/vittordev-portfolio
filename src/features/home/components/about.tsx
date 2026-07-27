@@ -7,36 +7,37 @@ const About: React.FC = () => {
   const { ref, isRevealed } = useReveal<HTMLDivElement>();
 
   return (
-    <section id="about" className="py-20 md:py-28">
+    <section id="about" className="py-16 sm:py-20 md:py-28">
       <div
         ref={ref}
         className={`reveal ${isRevealed ? 'is-revealed' : ''} container mx-auto px-4 md:px-6`}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="relative mb-16">
-            {/* Número-fantasma editorial atrás do título */}
+          <div className="relative mb-10 sm:mb-16">
+            {/* Número-fantasma editorial atrás do título — precisa de espaço para
+                funcionar; no mobile virava ruído sobre o próprio rótulo. */}
             <span
               aria-hidden="true"
-              className="pointer-events-none select-none absolute -top-8 -left-1 font-display text-8xl md:text-9xl font-bold leading-none text-slate-800/40"
+              className="pointer-events-none absolute -left-1 -top-8 hidden select-none font-display text-8xl font-bold leading-none text-slate-800/40 sm:block md:text-9xl"
             >
               01
             </span>
             <div className="relative">
               <span className="eyebrow mb-4">01 <span className="accent-rule" /> Sobre</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Sobre mim
               </h2>
-              <p className="text-lg text-slate-400 max-w-2xl">
+              <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Eu tenho uma paixão por criar interfaces de usuário intuitivas e engajadas,
                 capazes de proporcionar uma experiência excepcional aos usuários.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          <div className="mb-10 grid grid-cols-1 gap-6 sm:mb-16 sm:gap-10 md:grid-cols-2">
             <div className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-lg border border-slate-800 bg-slate-900/40 overflow-hidden transition-colors hover:border-slate-700`}>
               <div className="p-6 sm:p-8">
-                <h3 className="text-2xl font-bold mb-4">Minha Jornada</h3>
+                <h3 className="mb-4 text-xl font-bold sm:text-2xl">Minha Jornada</h3>
                 <p className="text-slate-400 mb-6">
                   Comecei querendo entender como as coisas funcionavam por trás da tela e acabei
                   construindo do zero o sistema que hoje mantém uma empresa inteira de pé. É uma
@@ -61,7 +62,7 @@ const About: React.FC = () => {
               style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
             >
               <div className="p-6 sm:p-8">
-                <h3 className="text-2xl font-bold mb-4">Minhas Competências</h3>
+                <h3 className="mb-4 text-xl font-bold sm:text-2xl">Minhas Competências</h3>
                 <ul className="space-y-4">
                   <AboutItem
                     icon={<Code size={24} className="text-accent-400" />}

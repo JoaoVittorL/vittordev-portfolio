@@ -6,7 +6,8 @@ import * as React from 'react';
 import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
-  'h-10 flex gap-2 items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-400/60 disabled:pointer-events-none disabled:opacity-50',
+  // h-11 no mobile (alvo de toque de 44px), h-10 no desktop
+  'flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-400/60 disabled:pointer-events-none disabled:opacity-50 md:h-10',
   {
     variants: {
       variant: {

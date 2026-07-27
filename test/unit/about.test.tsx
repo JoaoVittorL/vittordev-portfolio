@@ -14,9 +14,9 @@ describe('About', () => {
   it('lista as 4 competências', () => {
     render(<About />);
 
-    expect(screen.getByText('Código limpo')).toBeInTheDocument();
-    expect(screen.getByText('Responsividade')).toBeInTheDocument();
-    expect(screen.getByText('Frontend Frameworks')).toBeInTheDocument();
-    expect(screen.getByText('UI/UX')).toBeInTheDocument();
+    expect(screen.getByText('Código que envelhece bem')).toBeInTheDocument();
+    expect(screen.getByText('Do celular ao monitor')).toBeInTheDocument();
+    expect(screen.getByText('React & Next no dia a dia')).toBeInTheDocument();
+    expect(screen.getByText('Cuidado com quem usa')).toBeInTheDocument();
   });
 });

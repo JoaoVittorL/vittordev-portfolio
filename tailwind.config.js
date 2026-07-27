@@ -3,6 +3,11 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  future: {
+    // Envolve todo `hover:` em @media (hover: hover) — sem isso o estado de
+    // hover fica "preso" no elemento depois de um toque no mobile.
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       fontFamily: {

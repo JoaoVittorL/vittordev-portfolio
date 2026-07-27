@@ -56,26 +56,27 @@ const Skills: React.FC = () => {
   );
 
   return (
-    <section id="skills" className="py-20 md:py-28">
+    <section id="skills" className="py-16 sm:py-20 md:py-28">
       <div
         ref={ref}
         className={`reveal ${isRevealed ? 'is-revealed' : ''} container mx-auto px-4 md:px-6`}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="relative mb-12">
-            {/* Número-fantasma editorial atrás do título */}
+          <div className="relative mb-8 sm:mb-12">
+            {/* Número-fantasma editorial atrás do título — precisa de espaço para
+                funcionar; no mobile virava ruído sobre o próprio rótulo. */}
             <span
               aria-hidden="true"
-              className="pointer-events-none select-none absolute -top-8 -left-1 font-display text-8xl md:text-9xl font-bold leading-none text-slate-800/40"
+              className="pointer-events-none absolute -left-1 -top-8 hidden select-none font-display text-8xl font-bold leading-none text-slate-800/40 sm:block md:text-9xl"
             >
               02
             </span>
             <div className="relative">
               <span className="eyebrow mb-4">02 <span className="accent-rule" /> Habilidades</span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Minhas Habilidades
               </h2>
-              <p className="text-lg text-slate-400 max-w-2xl">
+              <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Aqui estão as tecnologias e ferramentas que sou proficiente.
                 Estou constantemente aprendendo e expandindo minha
                 habilidade para ficar atualizado com as tendências do mercado.
@@ -83,7 +84,7 @@ const Skills: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-10">
+          <div className="mb-8 flex flex-wrap gap-2 sm:mb-10">
             <CategoryButton
               active={category === 'all'}
               onClick={() => setCategory('all')}
@@ -120,8 +121,12 @@ const Skills: React.FC = () => {
             {filteredSkills.map((skill, index) => (
               <li
                 key={skill.name}
-                className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-full border border-slate-800 bg-slate-900/60 px-4 py-1.5 font-mono text-sm text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-400/40 hover:text-accent-300`}
-                style={{ '--reveal-delay': `${index * 40}ms` } as React.CSSProperties}
+                // Mais compacto no mobile: com px-4/text-sm cabiam só 2 por linha
+                // e a lista de 33 tags virava uma rolagem interminável.
+                className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1.5 font-mono text-xs text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-400/40 hover:text-accent-300 sm:px-4 sm:text-sm`}
+                // Teto no atraso: com 30+ tags o efeito em cascata levava mais de
+                // 1s para terminar — no mobile parecia travamento.
+                style={{ '--reveal-delay': `${Math.min(index, 10) * 30}ms` } as React.CSSProperties}
               >
                 {skill.name}
               </li>

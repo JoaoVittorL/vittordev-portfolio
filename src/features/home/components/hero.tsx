@@ -8,9 +8,14 @@ const Hero: React.FC = () => {
   const revealed = isRevealed ? 'is-revealed' : '';
 
   return (
+    /*
+     * min-h-svh e não 100vh: no iOS a barra de endereço entra na conta de vh, o
+     * conteúdo é cortado e a altura "salta" ao rolar.
+     * pb-32 no mobile reserva espaço para o indicador de scroll não sobrepor os CTAs.
+     */
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden"
+      className="relative flex min-h-svh items-center overflow-hidden pb-32 pt-24 sm:pb-16 sm:pt-28"
     >
       {/* Grid técnico sutil com máscara radial — textura, não decoração */}
       <div
@@ -21,7 +26,7 @@ const Hero: React.FC = () => {
       <div ref={ref} className="container mx-auto px-4 md:px-6 relative">
         <div className="max-w-4xl">
           {/* Status de disponibilidade — detalhe humano, não template */}
-          <span className={`reveal ${revealed} eyebrow mb-8`}>
+          <span className={`reveal ${revealed} eyebrow mb-6 sm:mb-8`}>
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60"></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400"></span>
@@ -30,14 +35,14 @@ const Hero: React.FC = () => {
           </span>
 
           <h1
-            className={`reveal ${revealed} text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.05] mb-6`}
+            className={`reveal ${revealed} mb-5 text-4xl font-bold leading-[1.05] sm:mb-6 sm:text-5xl md:text-7xl`}
             style={{ '--reveal-delay': '90ms' } as React.CSSProperties}
           >
             João Vittor<span className="text-accent-400">.</span>
           </h1>
 
           <p
-            className={`reveal ${revealed} text-lg md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10`}
+            className={`reveal ${revealed} mb-8 max-w-2xl text-base leading-relaxed text-slate-400 sm:mb-10 sm:text-lg md:text-2xl`}
             style={{ '--reveal-delay': '180ms' } as React.CSSProperties}
           >
             Analista de dados e desenvolvedor frontend. Transformo números e
@@ -73,7 +78,8 @@ const Hero: React.FC = () => {
       {/* Indicador de scroll discreto (sem bounce infinito) */}
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 hover:text-accent-300 transition-colors"
+        className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 p-2 text-slate-600 transition-colors hover:text-accent-300"
+        style={{ bottom: 'calc(env(safe-area-inset-bottom) + 1.5rem)' }}
         aria-label="Ir para a seção sobre"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Role</span>

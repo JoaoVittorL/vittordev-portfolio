@@ -4,22 +4,49 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 15px;
+  /* 16px no mobile (mínimo confortável de leitura em tela pequena),
+     15px a partir do tablet — o desktop fica exatamente como estava. */
+  font-size: 16px;
   color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* O header é fixo: sem isso toda âncora esconde o topo da seção atrás dele */
+  scroll-padding-top: 5rem;
+  /* Impede o iOS de inflar o texto ao girar para landscape */
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
 }
 
 @layer base {
   body {
     @apply bg-slate-950 font-sans leading-relaxed text-slate-400;
+    /* Rede de segurança: nenhum elemento decorativo gera scroll lateral */
+    overflow-x: hidden;
+    /* Remove o flash cinza do tap no Android/iOS — os estados :active cuidam do feedback */
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Títulos com a fonte display (Space Grotesk) — quebra o "Inter em tudo" */
   h1, h2, h3, h4 {
     @apply font-display text-slate-200;
     letter-spacing: -0.02em;
+  }
+
+  /* Palavras longas (URLs, e-mails) não estouram a caixa em telas estreitas */
+  p, h1, h2, h3, h4, li {
+    overflow-wrap: break-word;
+  }
+
+  /* Foco visível e consistente para navegação por teclado */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-400/60 ring-offset-2 ring-offset-slate-950;
+    border-radius: 2px;
   }
 
   /* Custom scrollbar */
@@ -45,14 +72,26 @@ html {
 }
 
 @layer components {
-  /* Rótulo pequeno em caixa alta + mono — cabeçalhos numerados de seção */
+  /* Rótulo pequeno em caixa alta + mono — cabeçalhos numerados de seção.
+     flex-wrap + tracking menor no mobile: com 0.2em o rótulo do hero estourava
+     a largura em telas de 360px. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-400;
+    @apply inline-flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-400 sm:tracking-[0.2em];
   }
 
   /* Linha divisória curta e intencional (acento) */
   .accent-rule {
     @apply h-px w-10 bg-accent-400/60;
+  }
+
+  /* Entrada em cascata dos links do menu mobile */
+  .menu-stagger > a {
+    @apply translate-y-3 opacity-0 transition-all duration-500 ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .menu-stagger[data-open='true'] > a {
+    @apply translate-y-0 opacity-100;
   }
 }
 
@@ -65,6 +104,17 @@ html {
 
   .reveal.is-revealed {
     @apply translate-y-0 opacity-100;
+  }
+
+  /* Alvo de toque mínimo (WCAG 2.5.8 AAA / Apple HIG) */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Respeita o recorte de tela (notch / barra de gestos) */
+  .pb-safe {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
   }
 }
 
@@ -96,5 +146,15 @@ html {
   .animate-float,
   .animate-ping {
     animation: none !important;
+  }
+
+  /* Zera transições/animações restantes (gaveta mobile, hovers, etc.) */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
