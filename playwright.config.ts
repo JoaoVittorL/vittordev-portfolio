@@ -7,9 +7,17 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: process.env.CI
+    ? // O reporter `github` publica cada falha como annotation (arquivo, linha e
+      // mensagem). Sem ele o GitHub mostra apenas "Process completed with exit
+      // code 1" e não há como diagnosticar sem baixar o artefato.
+      [['list'], ['github'], ['html', { open: 'never' }]]
+    : [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'http://localhost:50789',
+    // Rastro e screenshot da falha ficam no relatório enviado como artefato
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
   webServer: {
     command: 'pnpm dev:test',
