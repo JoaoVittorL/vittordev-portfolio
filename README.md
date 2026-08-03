@@ -14,7 +14,7 @@ testada em duas camadas e com as decisões de interface documentadas no próprio
 [![Vitest](https://img.shields.io/badge/Vitest-95%20testes-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev)
 [![Playwright](https://img.shields.io/badge/Playwright-23%20testes-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev)
 
-[**Ver ao vivo →**](https://vittordev.com.br)
+[**Ver ao vivo →**]([https://vittordev.com.br](https://vittorlopes.vercel.app/))
 
 </div>
 
