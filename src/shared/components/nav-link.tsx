@@ -14,7 +14,7 @@ const links = [
   { href: "#hero", label: "Início" },
   { href: "#about", label: "Sobre" },
   { href: "#skills", label: "Habilidades" },
-  // { href: "#projects", label: "Projetos" },
+  { href: "#projects", label: "Projetos" },
   { href: "#contact", label: "Contato" }
 ] as const;
 

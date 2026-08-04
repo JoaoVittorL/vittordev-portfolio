@@ -1,4 +1,5 @@
 import CategoryButton from '@/shared/components/category-button';
+import ScrollFloat from '@/shared/components/scroll-float';
 import { useReveal } from '@/shared/hooks/use-reveal';
 import React from 'react';
 
@@ -73,9 +74,9 @@ const Skills: React.FC = () => {
             </span>
             <div className="relative">
               <span className="eyebrow mb-4">02 <span className="accent-rule" /> Habilidades</span>
-              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
+              <ScrollFloat className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Minhas Habilidades
-              </h2>
+              </ScrollFloat>
               <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Aqui estão as tecnologias e ferramentas que sou proficiente.
                 Estou constantemente aprendendo e expandindo minha

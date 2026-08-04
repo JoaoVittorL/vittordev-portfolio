@@ -1,4 +1,6 @@
 import AboutItem from '@/shared/components/about-item';
+import ScrollFloat from '@/shared/components/scroll-float';
+import SpotlightCard from '@/shared/components/spotlight-card';
 import { useReveal } from '@/shared/hooks/use-reveal';
 import { Code, Globe, Layers, PenTool } from 'lucide-react';
 import React from 'react';
@@ -24,9 +26,9 @@ const About: React.FC = () => {
             </span>
             <div className="relative">
               <span className="eyebrow mb-4">01 <span className="accent-rule" /> Sobre</span>
-              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
+              <ScrollFloat className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Sobre mim
-              </h2>
+              </ScrollFloat>
               <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Eu tenho uma paixão por criar interfaces de usuário intuitivas e engajadas,
                 capazes de proporcionar uma experiência excepcional aos usuários.
@@ -35,8 +37,8 @@ const About: React.FC = () => {
           </div>
 
           <div className="mb-10 grid grid-cols-1 gap-6 sm:mb-16 sm:gap-10 md:grid-cols-2">
-            <div className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-lg border border-slate-800 bg-slate-900/40 overflow-hidden transition-colors hover:border-slate-700`}>
-              <div className="p-6 sm:p-8">
+            <div className={`reveal ${isRevealed ? 'is-revealed' : ''}`}>
+              <SpotlightCard className="h-full p-6 sm:p-8">
                 <h3 className="mb-4 text-xl font-bold sm:text-2xl">Minha Jornada</h3>
                 <p className="text-slate-400 mb-6">
                   Comecei querendo entender como as coisas funcionavam por trás da tela e acabei
@@ -54,14 +56,14 @@ const About: React.FC = () => {
                   história que os números dela contam. Sigo curioso, aprendendo algo novo a cada
                   projeto. Acredito que a curiosidade é o que me mantém aqui.
                 </p>
-              </div>
+              </SpotlightCard>
             </div>
 
             <div
-              className={`reveal ${isRevealed ? 'is-revealed' : ''} rounded-lg border border-slate-800 bg-slate-900/40 overflow-hidden transition-colors hover:border-slate-700`}
+              className={`reveal ${isRevealed ? 'is-revealed' : ''}`}
               style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
             >
-              <div className="p-6 sm:p-8">
+              <SpotlightCard className="h-full p-6 sm:p-8">
                 <h3 className="mb-4 text-xl font-bold sm:text-2xl">Minhas Competências</h3>
                 <ul className="space-y-4">
                   <AboutItem
@@ -85,7 +87,7 @@ const About: React.FC = () => {
                     description="Uma boa interface é aquela que ninguém precisa explicar. Cuido dos detalhes que fazem a pessoa terminar a tarefa sem nem perceber o caminho."
                   />
                 </ul>
-              </div>
+              </SpotlightCard>
             </div>
           </div>
         </div>

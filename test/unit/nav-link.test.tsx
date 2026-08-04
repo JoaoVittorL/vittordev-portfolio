@@ -10,12 +10,8 @@ describe('NavLinks', () => {
     expect(screen.getByRole('link', { name: /Início/ })).toHaveAttribute('href', '#hero');
     expect(screen.getByRole('link', { name: /Sobre/ })).toHaveAttribute('href', '#about');
     expect(screen.getByRole('link', { name: /Habilidades/ })).toHaveAttribute('href', '#skills');
+    expect(screen.getByRole('link', { name: /Projetos/ })).toHaveAttribute('href', '#projects');
     expect(screen.getByRole('link', { name: /Contato/ })).toHaveAttribute('href', '#contact');
-  });
-
-  it('não renderiza o link de Projetos (seção oculta)', () => {
-    render(<NavLinks />);
-    expect(screen.queryByRole('link', { name: /Projetos/ })).not.toBeInTheDocument();
   });
 
   it('avisa o destino ao pai em vez de navegar direto (menu mobile)', async () => {

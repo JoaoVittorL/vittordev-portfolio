@@ -9,12 +9,18 @@ describe('HomePage', () => {
     expect(container.querySelector('#hero')).toBeInTheDocument();
     expect(container.querySelector('#about')).toBeInTheDocument();
     expect(container.querySelector('#skills')).toBeInTheDocument();
+    expect(container.querySelector('#projects')).toBeInTheDocument();
     expect(container.querySelector('#contact')).toBeInTheDocument();
   });
 
-  it('NÃO renderiza a seção de projetos (oculta por decisão)', () => {
+  it('coloca Projetos entre Habilidades e Contato', () => {
     const { container } = render(<HomePage />);
-    expect(container.querySelector('#projects')).not.toBeInTheDocument();
+
+    const ids = Array.from(container.querySelectorAll('main > section')).map(
+      (section) => section.id,
+    );
+
+    expect(ids).toEqual(['hero', 'about', 'skills', 'projects', 'contact']);
   });
 
   it('renderiza header e footer', () => {

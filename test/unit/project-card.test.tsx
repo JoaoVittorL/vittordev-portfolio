@@ -1,16 +1,19 @@
 import { render, screen } from '@testing-library/react';
 
-import type { Project } from '@/features/home/components/projects';
+import type { Project } from '@/features/home/data/projects';
 import ProjectCard from '@/shared/components/project-card';
 
 const project: Project = {
-  id: 1,
+  id: 'meu-projeto',
   title: 'Meu Projeto',
-  description: 'Descrição do projeto',
+  summary: 'Descrição do projeto',
+  role: 'O papel que eu tive no projeto',
+  year: '2025',
   image: 'https://exemplo.com/imagem.png',
   tags: ['React', 'TypeScript'],
   liveUrl: 'https://exemplo.com',
   githubUrl: 'https://github.com/exemplo',
+  shots: [{ src: 'https://exemplo.com/imagem.png', caption: 'Tela inicial' }],
 };
 
 describe('ProjectCard', () => {

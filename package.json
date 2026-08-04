@@ -32,6 +32,7 @@
     "date-fns": "^4.1.0",
     "emailjs-com": "^3.2.0",
     "eslint": "9.14.0",
+    "gsap": "^3.15.0",
     "localforage": "^1.10.0",
     "lucide-react": "^0.454.0",
     "match-sorter": "^8.0.0",

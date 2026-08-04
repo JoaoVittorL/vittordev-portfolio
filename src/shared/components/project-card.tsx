@@ -1,4 +1,4 @@
-import { Project } from "@/features/home/components/projects";
+import { Project } from "@/features/home/data/projects";
 import { ExternalLink, Github } from "lucide-react";
 
 interface ProjectCardProps {
@@ -43,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       </div>
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-        <p className="text-slate-400 mb-4">{project.description}</p>
+        <p className="text-slate-400 mb-4">{project.summary}</p>
         <div className="flex flex-wrap gap-2">
           {project.tags.map(tag => (
             <span

@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import ContactItem from '@/shared/components/contact-item';
 import SocialLink from '@/shared/components/social-link';
 import { FormContact } from '@/shared/components/form-contact';
+import ScrollFloat from '@/shared/components/scroll-float';
 import { useReveal } from '@/shared/hooks/use-reveal';
 
 const Contact: React.FC = () => {
@@ -22,13 +23,13 @@ const Contact: React.FC = () => {
               aria-hidden="true"
               className="pointer-events-none absolute -left-1 -top-8 hidden select-none font-display text-8xl font-bold leading-none text-slate-800/40 sm:block md:text-9xl"
             >
-              03
+              04
             </span>
             <div className="relative">
-              <span className="eyebrow mb-4">03 <span className="accent-rule" /> Contato</span>
-              <h2 className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
+              <span className="eyebrow mb-4">04 <span className="accent-rule" /> Contato</span>
+              <ScrollFloat className="mb-4 text-3xl font-bold sm:mb-6 md:text-5xl">
                 Entre em Contato
-              </h2>
+              </ScrollFloat>
               <p className="max-w-2xl text-base text-slate-400 sm:text-lg">
                 Tenho uma boa maneira de falar com você, seja por e-mail ou telefone.
                 Estou sempre aberto a novas oportunidades de trabalho e colaboração.
